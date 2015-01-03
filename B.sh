@@ -28,10 +28,16 @@ apt-get install ttf-bitstream-vera
 
 
 #====================================== Cran R Installation ===========================================
-add-apt-repository "deb http://cran.stat.ucla.edu/bin/linux/ubuntu trusty/"
-apt-key adv --keyserver keyserver.ubuntu.com --recv-key E084DAB9
-apt-get update
-apt-get install -y r-base
+#add-apt-repository "deb http://cran.stat.ucla.edu/bin/linux/ubuntu trusty/"
+#apt-key adv --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+#apt-get update
+#apt-get install -y r-base
+
+#r-Studio
+apt-get install gdebi-core
+apt-get install libapparmor1  # Required only for Ubuntu, not Debian
+wget http://download2.rstudio.org/rstudio-server-0.98.501-amd64.deb
+gdebi rstudio-server-0.98.501-amd64.deb
 #======================================================================================================
 
 
