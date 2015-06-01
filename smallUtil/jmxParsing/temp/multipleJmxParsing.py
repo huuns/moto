@@ -24,14 +24,36 @@
 import time
 
 def responseTimeParsing():
-  f  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_10User.jmx" , "r")
-  rf = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_10User_ResponseTime.txt" , "w")
- 
-  rf.write("sample, response\n")
-  readLines = f.readlines()
-  [rf.write("%s, %s" % (index ,line[line.rfind(",")+1:])) for index, line in enumerate(readLines) if index<1000]
+  f1  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_10User.jmx" , "r")
+  f2  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_20User.jmx" , "r")
+  f3  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_30User.jmx" , "r")
+  f4  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_40User.jmx" , "r")
+  f5  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_50User.jmx" , "r")
 
-  f.close()
+  rf = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_MultipleUser_ResponseTime.txt" , "w")
+ 
+  rf.write("sample, user10, user20, user30, user40, user50\n")
+  readLines1 = f1.readlines()
+  readLines2 = f2.readlines()
+  readLines3 = f3.readlines()
+  readLines4 = f4.readlines()
+  readLines5 = f5.readlines()
+
+  rTime10User = ["%s,%s" % (index ,line[line.rfind(",")+1:-1]) for index, line in enumerate(readLines1) if index<1000]
+  rTime20User = ["%s" % (line[line.rfind(","):-1]) for index, line in enumerate(readLines2) if index<1000]
+  rTime30User = ["%s" % (line[line.rfind(","):-1]) for index, line in enumerate(readLines3) if index<1000]
+  rTime40User = ["%s" % (line[line.rfind(","):-1]) for index, line in enumerate(readLines4) if index<1000]
+  rTime50User = ["%s" % (line[line.rfind(","):-1]) for index, line in enumerate(readLines5) if index<1000]
+ 
+  zipped = zip(rTime10User, rTime20User, rTime30User, rTime40User, rTime50User)
+
+  [rf.write("%s%s%s%s%s\n" % (rTime10User, rTime20User, rTime30User, rTime40User, rTime50User)) for rTime10User, rTime20User, rTime30User, rTime40User, rTime50User in zipped]
+
+  f1.close()
+  f2.close()
+  f3.close()
+  f4.close()
+  f5.close()
   rf.close()
 
 if __name__ == "__main__":

@@ -24,14 +24,32 @@
 import time
 
 def responseTimeParsing():
-  f  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_10User.jmx" , "r")
-  rf = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_10User_ResponseTime.txt" , "w")
- 
-  rf.write("sample, response\n")
-  readLines = f.readlines()
-  [rf.write("%s, %s" % (index ,line[line.rfind(",")+1:])) for index, line in enumerate(readLines) if index<1000]
+  f1  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_10User.jmx" , "r")
+  f2  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_20User.jmx" , "r")
+  f3  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_30User.jmx" , "r")
+  f4  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_40User.jmx" , "r")
+  f5  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_50User.jmx" , "r")
 
-  f.close()
+  rf = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_MultipleUser_ResponseTime2.txt" , "w")
+ 
+  rf.write("group, response\n")
+  readLines1 = f1.readlines()
+  readLines2 = f2.readlines()
+  readLines3 = f3.readlines()
+  readLines4 = f4.readlines()
+  readLines5 = f5.readlines()
+
+  [rf.write("%s, %s" % ("user10" ,line[line.rfind(",")+1:])) for index, line in enumerate(readLines1) if index<1000]
+  [rf.write("%s, %s" % ("user20" ,line[line.rfind(",")+1:])) for index, line in enumerate(readLines2) if index<1000]
+  [rf.write("%s, %s" % ("user30" ,line[line.rfind(",")+1:])) for index, line in enumerate(readLines3) if index<1000]
+  [rf.write("%s, %s" % ("user40" ,line[line.rfind(",")+1:])) for index, line in enumerate(readLines4) if index<1000]
+  [rf.write("%s, %s" % ("user50" ,line[line.rfind(",")+1:])) for index, line in enumerate(readLines5) if index<1000]
+
+  f1.close()
+  f2.close()
+  f3.close()
+  f4.close()
+  f5.close()
   rf.close()
 
 if __name__ == "__main__":
