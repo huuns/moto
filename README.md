@@ -1,2 +1,3 @@
-uinitsetup
+moto
 ==========
+...
