@@ -24,11 +24,11 @@
 import time
 
 def responseTimeParsing():
-  f = open("/home/moto/R/imageFusion_in_188Cloud/data/0601_Threshold_10User.jmx" , "r")
+  f  = open("/home/moto/R/imageFusion_in_188Cloud/data/0601_Threshold_10User.jmx" , "r")
   rf = open("/home/moto/R/imageFusion_in_188Cloud/data/0601_Threshold_10User_ResponseTime.txt" , "w")
 
   readLines = f.readlines()
-  [rf.write(line[line.rfind(",")+1:]) for line in readLines]
+  [rf.write("%s %s" % (index ,line[line.rfind(",")+1:])) for index, line in enumerate(readLines) if index<1000]
 
   f.close()
   rf.close()
