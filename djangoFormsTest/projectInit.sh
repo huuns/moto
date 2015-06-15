@@ -1,12 +1,8 @@
 #!/bin/bash
 
-
 # variables setting
 projectName="formstest"  # ---> lower case 
 addAppName="formstestapp" 
-HOST=""         # ---> db host
-CHOST=""        # ---> django development runserver ip address
-CPORT=""        # ---> django development runserver port number
 
 # django start project
 cd /var/www/html
