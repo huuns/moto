@@ -24,13 +24,13 @@
 import time
 
 def responseTimeParsing():
-  f1  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_10User.jmx" , "r")
-  f2  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_20User.jmx" , "r")
-  f3  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_30User.jmx" , "r")
-  f4  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_40User.jmx" , "r")
-  f5  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_50User.jmx" , "r")
+  f1  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0605_sub_10User.jmx" , "r")
+  f2  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0605_sub_20User.jmx" , "r")
+  f3  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0605_sub_30User.jmx" , "r")
+  f4  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0605_sub_40User.jmx" , "r")
+  f5  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0605_sub_50User.jmx" , "r")
 
-  rf = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_MultipleUser_ResponseTime2.txt" , "w")
+  rf = open("/home/ruser/R/imageFusion_in_188Cloud/data/0605_sub_MultipleUser_ResponseTime.txt" , "w")
  
   rf.write("group, response\n")
   readLines1 = f1.readlines()
