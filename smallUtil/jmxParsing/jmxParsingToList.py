@@ -24,8 +24,8 @@
 import time
 
 def responseTimeParsing():
-  f  = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_10User.jmx" , "r")
-  rf = open("/home/ruser/R/imageFusion_in_188Cloud/data/0601_Threshold_10User_ResponseTime.txt" , "w")
+  f  = open("./data/5user_60request_autoscaling_default_responseTimesOverTime_max3instance.jmx" , "r")
+  rf = open("/home/moto/zdrive/Dropbox/responseTimesOverTime.txt" , "w")
  
   rf.write("sample, response\n")
   readLines = f.readlines()
