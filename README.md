@@ -1,10 +1,25 @@
 moto 
 ==========
 
+
+
+
+### 0. Purpose
+- Python & JavaScript Example Collection
+
+
+
+
 ### 1. License
-> MIT
+- MIT
+
+
+
 
 ### 2. Contact 
-> openmoto23@gmail.com
+- openmoto23@gmail.com
 
-### 3. 
+
+
+
+
