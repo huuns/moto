@@ -4,7 +4,13 @@
 # dependency : psycopg2==2.6.1 (https://pypi.python.org/pypi/psycopg2)
 # =====================================================================
 
+
+
+
 import psycopg2
+
+
+
 
 class T1_DB_Management:
   conn, cur = None, None
