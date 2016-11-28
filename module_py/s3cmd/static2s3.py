@@ -27,8 +27,7 @@ staticDL = [
 ]
 
 for directoryAndOption in staticDL:
-    static2s3 = 's3cmd sync --guess-mime-type --add-header="Cache-Control:max-age=31536000" --acl-public --delete-removed -P -r %s s3://thefitshoes/' % (directoryAndOption)
-    #static2s3 = 's3cmd sync --cf-invalidate --cf-invalidate-default-index --guess-mime-type --acl-public --delete-removed -P -r %s s3://thefitshoes/' % (directoryAndOption)
+    static2s3 = 's3cmd sync --guess-mime-type --add-header="Cache-Control:max-age=31536000" --acl-public --delete-removed -P -r %s s3://bucketname/' % (directoryAndOption)
 
     print static2s3
 

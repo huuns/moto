@@ -9,7 +9,6 @@
 
 var OBJSAMPLE = function() {
 
-
     var successMessage = function(message, in_delay) {
         $.bootstrapGrowl(message, {
             type: 'success',

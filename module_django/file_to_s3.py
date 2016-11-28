@@ -30,7 +30,6 @@ class SAMPLE(models.Model):
 #rest
 from rest_framework import serializers
 
-#thefit
 from models import SAMPLE
 
 class SAMPLESerializer(serializers.HyperlinkedModelSerializer):
@@ -61,7 +60,6 @@ from rest_framework.decorators import permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.decorators import detail_route, list_route, permission_classes
 
-#thefit
 from models import SAMPLE
 from serializers import SAMPLESerializer
 
