@@ -1,12 +1,14 @@
 // =============================================================================
 // write        : moto
-// update       : 2016.10.31.
+// update       : 2016.11.28.
 // ajax example : post & get
 // dependency   : jQuery
 // =============================================================================
 
-
-
+var INPUTDATA = {
+    AA: "aa",
+    BB: "bb"
+};
 
 // post ========================================================================
 
@@ -32,14 +34,7 @@ $.ajax({
 // post ========================================================================
 
 
-
 // get =========================================================================
-
-var INPUTDATA = {
-    AA: "aa",
-    BB: "bb",
-    CC: "cc"
-}
 
 $.ajax({
     type: "get",
@@ -55,3 +50,50 @@ $.ajax({
 });
 
 // get =========================================================================
+
+
+// patch =======================================================================
+
+var target_id = 1;
+
+$.ajax({
+    type: "patch",
+    data: INPUTDATA,
+    beforeSend: function(request) {
+        //django
+        request.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+    },
+    url: "/restapi/endpoint/" + target_id + "/",
+    error: function(response) {
+        console.log("error:" + response);
+    },
+    success: function(response) {
+        console.log(response);
+    },
+    complete: function() {}
+});
+
+// patch =======================================================================
+
+
+// delete ======================================================================
+
+var target_id = 1;
+
+$.ajax({
+    type: "DELETE",
+    beforeSend: function(request) {
+        //for django
+        request.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+    },
+    url: "/restapi/endpoint/" + target_id + "/",
+    error: function(response) {
+        console.log("error:" + response);
+    },
+    success: function(response) {
+        console.log(response);
+    },
+    complete: function() {}
+});
+
+// delete ======================================================================
