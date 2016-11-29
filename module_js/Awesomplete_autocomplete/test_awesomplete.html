@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="awesomplete.css" />
+    <script src="awesomplete.js"></script>
+
+    <script>
+        // github page : https://github.com/LeaVerou/awesomplete
+        // demo   page : https://leaverou.github.io/awesomplete
+
+        function domReady() {
+            content = [
+                "강남구",
+                "강동구",
+                "강북구",
+                "강서구",
+                "관악구",
+                "광진구",
+                "구로구",
+                "금천구",
+                "노원구",
+                "도봉구",
+                "동대문구",
+                "동작구",
+                "마포구",
+                "서대문구",
+                "서초구",
+                "성동구",
+                "성북구",
+                "송파구",
+                "양천구",
+                "영등포구",
+                "용산구",
+                "은평구",
+                "종로구",
+                "중구",
+                "중랑구"
+            ]
+
+            var input = document.getElementById("awesomplete_input");
+            var awesomplete = new Awesomplete(input, {
+                list: content,
+                autoFirst: true
+            });
+
+
+            window.addEventListener("awesomplete-select", function(e) {
+                console.log("awesomplete-select");
+            }, false);
+
+            window.addEventListener("awesomplete-selectcomplete", function(e) {
+                console.log("awesomplete-selectcomplete");
+            }, false);
+
+            window.addEventListener("awesomplete-open", function(e) {
+                console.log("awesomplete-open");
+            }, false);
+
+            window.addEventListener("awesomplete-close", function(e) {
+                console.log("awesomplete-close");
+            }, false);
+
+            window.addEventListener("awesomplete-highlight", function(e) {
+                console.log("awesomplete-highlight");
+            }, false);
+        };
+
+
+
+        // Document Ready ======================================================
+        // Mozilla, Opera, Webkit
+        if (document.addEventListener) {
+            document.addEventListener("DOMContentLoaded", function() {
+                document.removeEventListener("DOMContentLoaded", arguments.callee, false);
+                domReady();
+            }, false);
+
+            // If IE event model is used
+        } else if (document.attachEvent) {
+            // ensure firing before onload
+            document.attachEvent("onreadystatechange", function() {
+                if (document.readyState === "complete") {
+                    document.detachEvent("onreadystatechange", arguments.callee);
+                    domReady();
+                }
+            });
+        }
+        //======================================================================
+    </script>
+</head>
+
+<body>
+    <input id="awesomplete_input" />
+</body>
+
+</html>
