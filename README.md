@@ -17,3 +17,6 @@ moto
 
 ### 2. Contact 
 - openmoto23@gmail.com
+
+### 3. Blog
+- http://ngee.tistory.com
