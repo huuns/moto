@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <style></style>
+    <link rel="stylesheet" href="../common/bootstrap/css/bootstrap.min.css" />
+
+    <script src="../common/jquery/jquery.min.js"></script>
+    <script src="../common/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script>
+        function domReady() {
+            var html = [];
+
+            html.push('<button id="ui-append-button" type="button">UI BUTTON</button>');
+
+            html.push('<div class="modal" id="test-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">');
+            html.push('	<div class="modal-dialog modal-sm">');
+            html.push('		<div class="modal-content">');
+            html.push('			<div class="modal-body" style="padding-top:10px;">');
+
+            html.push('         <div class="container-fluid row">');
+            html.push('  			      TEST MODAL SHOW');
+            html.push('             <div class="col-lg-12">');
+            html.push('             		<p class="close-text pull-right btn btn-danger btn-sm">닫기</p>');
+            html.push('             </div>');
+            html.push('  			  </div>');
+
+            html.push('			</div>');
+            html.push('		</div>');
+            html.push('	</div>');
+            html.push('</div>');
+
+            document.getElementById("ui-append-div").innerHTML = html.join('');
+
+            document.getElementById('ui-append-button').setAttribute("style", "margin:5px; width:200px; ");
+            document.getElementById('ui-append-button').setAttribute("class", 'btn btn-primary btn-sm');
+
+            $('#ui-append-button').click(function(e) {
+                e.preventDefault();
+                console.log("UI BUTTON CLICK");
+                $('#test-modal').modal('show');
+            });
+
+            $('.close-text').click(function(e) {
+                e.preventDefault();
+                $('#test-modal').modal('hide');
+            });
+
+        };
+
+
+        // Document Ready ======================================================
+        // Mozilla, Opera, Webkit
+        if (document.addEventListener) {
+            document.addEventListener("DOMContentLoaded", function() {
+                document.removeEventListener("DOMContentLoaded", arguments.callee, false);
+                domReady();
+            }, false);
+
+            // If IE event model is used
+        } else if (document.attachEvent) {
+            // ensure firing before onload
+            document.attachEvent("onreadystatechange", function() {
+                if (document.readyState === "complete") {
+                    document.detachEvent("onreadystatechange", arguments.callee);
+                    domReady();
+                }
+            });
+        }
+        //======================================================================
+
+    </script>
+</head>
+
+<body>
+    <div id="ui-append-div"></div>
+</body>
+
+
+
+
+</html>
