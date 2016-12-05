@@ -2,7 +2,7 @@
 ### Django                  : 1.10.4
 ### djangorestframework     : 3.5.3
 ### djangorestframework-jwt : 1.9.0
-### 
+###
 
 import os, datetime
 
@@ -34,7 +34,6 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
 
     'jwtTest'
 ]
@@ -125,7 +124,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
-
     ),
 }
 
