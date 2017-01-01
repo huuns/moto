@@ -4,6 +4,10 @@ import requests
 
 class KAKAO_ID_TOKEN_CHECK:
 
+    # GET /v1/user/access_token_info HTTP/1.1
+    # Host: kapi.kakao.com
+    # Authorization: Bearer {access_token}
+    # Content-type: application/x-www-form-urlencoded;charset=utf-8
     def kakao_check(self, kakaoid, token):
         endpoint = "https://kapi.kakao.com/v1/user/access_token_info"
         headers  = {"Authorization":"Bearer %s" % (token) }
@@ -23,4 +27,3 @@ class KAKAO_ID_TOKEN_CHECK:
         headers  = {"Authorization":"KakaoAK %s" % (adminToken) }
         userCount = requests.get(endpoint,headers=headers).json()["total_count"]
         return userCount
-        
