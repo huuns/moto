@@ -22,7 +22,7 @@ var _ = function (input, o) {
 
 	configure(this, {
 		minChars: 1,
-		maxItems: 10,
+		maxItems: 20,
 		autoFirst: false,
 		data: _.DATA,
 		filter: _.FILTER_CONTAINS,
@@ -244,7 +244,7 @@ _.prototype = {
 				.filter(function(item) {
 					return me.filter(item, value);
 				})
-				.sort(this.sort)
+				// .sort(this.sort)
 				.slice(0, this.maxItems);
 
 			this.suggestions.forEach(function(text) {

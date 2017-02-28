@@ -5,6 +5,13 @@
     <link rel="stylesheet" href="awesomplete.css" />
     <script src="awesomplete.js"></script>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+  integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+  crossorigin="anonymous"></script>
+
     <script>
         // github page : https://github.com/LeaVerou/awesomplete
         // demo   page : https://leaverou.github.io/awesomplete
@@ -41,7 +48,21 @@
             var input = document.getElementById("awesomplete_input");
             var awesomplete = new Awesomplete(input, {
                 list: content,
-                autoFirst: true
+                autoFirst: true,
+                minChars: 0
+            });
+
+            $('#awesomplete_input').on('focus', function() {
+                awesomplete.evaluate();
+
+                //for IE
+                $('#awesomplete_input > ul').show();
+            });
+
+            $('#awesomplete_input').on('blur', function() {
+
+                //for IE
+                $('#awesomplete_input > ul').hide();
             });
 
 

@@ -6,19 +6,18 @@
     <link rel="stylesheet" href="{% static 'awesomplete.css' %}" />
     <script src="{% static 'awesomplete.js' %}"></script>
 
-    <script
-  src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <script>
         // github page : https://github.com/LeaVerou/awesomplete
@@ -27,6 +26,7 @@
         function domReady() {
             content = [
                 "강남구",
+                "강남구 반포동",
                 "강동구",
                 "강북구",
                 "강서구",
@@ -56,8 +56,23 @@
             var input = document.getElementById("awesomplete_input");
             var awesomplete = new Awesomplete(input, {
                 list: content,
-                autoFirst: true
+                autoFirst: true,
+                minChars: 0
             });
+
+            $('#awesomplete_input').on('focus', function() {
+                awesomplete.evaluate();
+
+                //for IE
+                $('#awesomplete_input > ul').show();
+            });
+
+            $('#awesomplete_input').on('blur', function() {
+
+                //for IE
+                $('#awesomplete_input > ul').hide();
+            });
+
 
 
             window.addEventListener("awesomplete-select", function(e) {
@@ -66,6 +81,13 @@
 
             window.addEventListener("awesomplete-selectcomplete", function(e) {
                 console.log("awesomplete-selectcomplete");
+
+                var html = [];
+
+                html.push('selected item : ');
+                html.push(e.text);
+                document.getElementById("selected_list_print_div").innerHTML = html.join('');
+
             }, false);
 
             window.addEventListener("awesomplete-open", function(e) {
@@ -106,11 +128,13 @@
 </head>
 
 <body>
-  <form>
-  <div class="form-group">
-    <input type="text" id="awesomplete_input" class="form-control"  />
-  </div>
-  </form
-</body>
+    <form>
+        <div class="form-group">
+            <input type="text" id="awesomplete_input" class="form-control" />
+        </div>
+
+        <div class="form-group" id="selected_list_print_div">
+        </div>
+    </form </body>
 
 </html>
