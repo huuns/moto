@@ -26,8 +26,8 @@ class WEBPARSER:
         # lezhin login ----------------------------------------------------------------- start
         browser.open('https://www.lezhin.com/ko/login')
         form = browser.get_form(id='login-form')
-        form['username'].value = 'lainesl2kjldkjslkjfr23@naver.com'
-        form['password'].value = 'nellorfeo738a;dlfkjlakjrl3k2lkjlfkjaldksjflaksjdflkjasdf6'
+        form['username'].value = '2kjldkjslkjfr23@naver.com'
+        form['password'].value = ';dlfkjlakjrl3k2lkjlfkjaldksjflaksjdflkdf'
         browser.submit_form(form)
         # lezhin login ----------------------------------------------------------------- end
 

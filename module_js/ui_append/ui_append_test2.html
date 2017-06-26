@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <style></style>
+    <link rel="stylesheet" href="../common/bootstrap/css/bootstrap.min.css" />
+
+    <script src="../common/jquery/jquery.min.js"></script>
+    <script src="../common/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script>
+        function domReady() {
+            // var html = [];
+
+            var start = Math.floor(new Date().getTime() / 1000);
+            console.log(start);
+
+            var html_code = `
+            <button id="ui-append-button" type="button">UI BUTTON</button>
+            <div class="modal" id="test-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            	<div class="modal-dialog modal-sm">
+            		<div class="modal-content">
+            			<div class="modal-body" style="padding-top:10px;">
+                     <div class="container-fluid row">
+              			      TEST MODAL SHOW
+                         <div class="col-lg-12">
+                         		<p class="close-text pull-right btn btn-danger btn-sm">닫기</p>
+                         </div>
+              			  </div>
+            			</div>
+            		</div>
+            	</div>
+            </div>`;
+
+            // Grave accent (키보드에서 숫자 1 왼쪽에 있는 거)를 사용하면 여러 줄을 한 번에 묶을 수 있어요. !! 코드가 더 깔끔하고 작성하기 편리합니다.
+
+            // document.getElementById("ui-append-div").innerHTML = html.join('');
+            document.getElementById("ui-append-div").innerHTML = html_code;
+            var end = Math.floor(new Date().getTime() / 1000);
+            console.log(end);
+            console.log(end - start);
+
+            document.getElementById('ui-append-button').setAttribute("style", "margin:5px; width:200px; ");
+            document.getElementById('ui-append-button').setAttribute("class", 'btn btn-primary btn-sm');
+
+            $('#ui-append-button').click(function(e) {
+                e.preventDefault();
+                console.log("UI BUTTON CLICK");
+                $('#test-modal').modal('show');
+            });
+
+            $('.close-text').click(function(e) {
+                e.preventDefault();
+                $('#test-modal').modal('hide');
+            });
+
+        };
+
+
+        // Document Ready ======================================================
+        // Mozilla, Opera, Webkit
+        if (document.addEventListener) {
+            document.addEventListener("DOMContentLoaded", function() {
+                document.removeEventListener("DOMContentLoaded", arguments.callee, false);
+                domReady();
+            }, false);
+
+            // If IE event model is used
+        } else if (document.attachEvent) {
+            // ensure firing before onload
+            document.attachEvent("onreadystatechange", function() {
+                if (document.readyState === "complete") {
+                    document.detachEvent("onreadystatechange", arguments.callee);
+                    domReady();
+                }
+            });
+        }
+        //======================================================================
+
+    </script>
+</head>
+
+<body>
+    <div id="ui-append-div"></div>
+</body>
+
+
+
+
+</html>

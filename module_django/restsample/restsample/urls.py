@@ -10,4 +10,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^product_a/', include('a_management.urls')),
+
+    # (r'^$', 'django_sample.plus.views.index'),
+    # (r'^oauth2callback', 'django_sample.plus.views.auth_return'),
 ]

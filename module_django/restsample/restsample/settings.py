@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'a_management',
+
+
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -61,6 +64,17 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',),
   'PAGE_SIZE': 10
 }
+
+
+
+
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+
 
 
 ROOT_URLCONF = 'restsample.urls'
