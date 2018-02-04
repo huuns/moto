@@ -1,0 +1,309 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+
+    <style>
+        .jsgrid-cell {
+            font-size: 11px;
+            padding: 1px;
+            line-height: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <span style="font-size:13px; color:#343434; font-weight:800"> Refer: P2P 협회공시자료 (누적 대출액, 단위:천원) 2017.06.30 기준 </span>
+    <div id="p2pgg" style="height:450px; width:100%;">
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <span style="font-size:13px; color:#343434; font-weight:800"> Refer: P2P 협회공시자료 (대출잔액, 단위:천원) 2017.06.30 기준 </span>
+    <div id="p2pgg_remain" style="height:450px; width:100%;">
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <span style="font-size:13px; color:#343434; font-weight:800"> Refer: P2P 협회공시자료 (연체율, 단위:%) 2017.06.30 기준 </span>
+    <div id="p2pgg_delay" style="height:450px; width:100%;">
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <span style="font-size:13px; color:#343434; font-weight:800"> Refer: P2P 협회공시자료 (부도율, 단위:%) 2017.06.30 기준 </span>
+    <div id="p2pgg_bad" style="height:450px; width:100%;">
+    </div>
+
+
+
+    <script>
+        function number_format(number, decimals, dec_point, thousands_sep) {
+
+            var n = !isFinite(+number) ? 0 : +number,
+                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                toFixedFix = function(n, prec) {
+                    // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+                    var k = Math.pow(10, prec);
+                    return Math.round(n * k) / k;
+                },
+                s = (prec ? toFixedFix(n, prec) : Math.round(n)).toString().split('.');
+            if (s[0].length > 3) {
+                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+            }
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
+            return s.join(dec);
+        }
+
+
+        var p2p_total_value = [
+            ['x', '2017-06-01'],
+            ['테라펀딩', 147513000],
+            ['루프펀딩', 114250000],
+            ['피플펀드', 78291100],
+            ['8퍼센트', 76073450],
+            ['빌리', 75211260],
+            ['투게더앱스', 67951500],
+            ['펀듀', 61774750],
+            ['코리아펀딩', 61191330],
+            ['팝펀딩', 56028653],
+            ['렌딧', 52232547],
+            ['펀딩플랫폼', 38379800],
+            ['소딧', 37995700],
+            ['어니스트 펀드', 29386500],
+            ['이디움펀딩', 25576400],
+            ['헬로펀딩', 25200000],
+            ['시소펀딩', 22998100],
+            ['모아펀딩', 20356230],
+            ['비욘드펀드', 19573300],
+            ['펀다', 19350619],
+            ['탱커펀드', 16408500]
+        ];
+
+        var p2p_remain_value = [
+            ['x', '2017-06-01'],
+            ['루프펀딩', 76950000],
+            ['테라펀딩', 71275000],
+            ['피플펀드', 40461890],
+            ['빌리', 35818316],
+            ['8퍼센트', 35132683],
+            ['렌딧', 33288074],
+            ['투게더앱스', 28879500],
+            ['팝펀딩', 28452275],
+            ['펀딩플랫폼', 25012200],
+            ['펀듀', 23780000],
+            ['코리아펀딩', 20976200],
+            ['어니스트 펀드', 18861869],
+            ['비욘드펀드', 16942000],
+            ['헬로펀딩', 16900000],
+            ['이디움펀딩', 16300000],
+            ['모아펀딩', 14940000],
+            ['소딧', 12563000],
+            ['시소펀딩', 8722500],
+            ['펀다', 8207895],
+            ['탱커펀드', 7052972]
+        ];
+
+        var p2p_delay_value = [
+          ['x', '2017-06-01'],
+          ['빌리',	9.93]
+          ,['펀딩플랫폼',	8]
+          ,['테라펀딩',	2.53]
+          ,['펀다',	1.81]
+          ,['팝펀딩',	0.93]
+          ,['렌딩사이언스',	0.83]
+          ,['올리펀딩',	0.65]
+          ,['펀디드',	0.51]
+          ,['렌딧',	0.5]
+          ,['어니스트 펀드',	0.5]
+          ,['8퍼센트',	0.44]
+        ]
+
+        var p2p_bad_value = [
+          ['x', '2017-06-01'],
+          ['빌리',	3.38]
+          ,['8퍼센트',	1.42]
+          ,['코리아펀딩',	1.4]
+          ,['펀다',	1.31]
+          ,['렌딧',	1.22]
+          ,['어니스트 펀드',	1.13]
+          ,['렌딩사이언스',	0.95]
+          ,['팝펀딩',	0.88]
+          ,['탱커펀드',	0.43]
+          ,['펀디드',	0.18]
+          ,['올리펀딩',	0.16]
+        ]
+
+        c3.generate({
+            bindto: '#p2pgg',
+            data: {
+                x: 'x',
+                columns: p2p_total_value,
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.9
+                }
+            },
+            tooltip: {
+                show: true,
+                format: {
+                    title: function(x) {
+                        x = x.getFullYear() + "-" + (x.getMonth() + 1) + " 누적 대출액 (단위:천원) Top 20";
+                        return x;
+                    },
+                    value: function(value, ratio, id) {
+                        return number_format(value);;
+                    }
+                }
+            },
+            color: {
+                pattern: ['#DBDBEB', '#7577CD', '#080957', '#FF6D02', '#1684A7', '#09A599', '#F6EC72', '#6A759B', '#21273D', '#B9D4F1', '#2E3B3E', '#50666B', '#F9B8BE', '#FD6378', '#F1E58A', '#4C5374', '#71647C', '#D0F0F7',
+                    '#3F3038', '#FDF6FA', '#F1684E', '#85C8DD', '#D3E0E2', '#E9F6F5', '#E8F79A', '#49D292', '#3B445B', '#383746', '#9F1861', '#EFE94B'
+                ]
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '%Y-%m',
+                    }
+                }
+            }
+        });
+
+        c3.generate({
+            bindto: '#p2pgg_remain',
+            data: {
+                x: 'x',
+                columns: p2p_remain_value,
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.9
+                }
+            },
+            tooltip: {
+                show: true,
+                format: {
+                    title: function(x) {
+                        x = x.getFullYear() + "-" + (x.getMonth() + 1) + " 대출잔액 (단위:천원) Top 20";
+                        return x;
+                    },
+                    value: function(value, ratio, id) {
+                        return number_format(value);;
+                    }
+                }
+            },
+            color: {
+                pattern: ['#DBDBEB', '#7577CD', '#080957', '#FF6D02', '#1684A7', '#09A599', '#F6EC72', '#6A759B', '#21273D', '#B9D4F1', '#2E3B3E', '#50666B', '#F9B8BE', '#FD6378', '#F1E58A', '#4C5374', '#71647C', '#D0F0F7',
+                    '#3F3038', '#FDF6FA', '#F1684E', '#85C8DD', '#D3E0E2', '#E9F6F5', '#E8F79A', '#49D292', '#3B445B', '#383746', '#9F1861', '#EFE94B'
+                ]
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '%Y-%m',
+                    }
+                }
+            }
+        });
+
+
+        c3.generate({
+            bindto: '#p2pgg_delay',
+            data: {
+                x: 'x',
+                columns: p2p_delay_value,
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.9
+                }
+            },
+            tooltip: {
+                show: true,
+                format: {
+                    title: function(x) {
+                        x = x.getFullYear() + "-" + (x.getMonth() + 1) + " 연체율 (단위:%)";
+                        return x;
+                    }
+                }
+            },
+            color: {
+                pattern: ['#DBDBEB', '#7577CD', '#080957', '#FF6D02', '#1684A7', '#09A599', '#F6EC72', '#6A759B', '#21273D', '#B9D4F1', '#2E3B3E', '#50666B', '#F9B8BE', '#FD6378', '#F1E58A', '#4C5374', '#71647C', '#D0F0F7',
+                    '#3F3038', '#FDF6FA', '#F1684E', '#85C8DD', '#D3E0E2', '#E9F6F5', '#E8F79A', '#49D292', '#3B445B', '#383746', '#9F1861', '#EFE94B'
+                ]
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '%Y-%m',
+                    }
+                }
+            }
+        });
+
+
+        c3.generate({
+            bindto: '#p2pgg_bad',
+            data: {
+                x: 'x',
+                columns: p2p_bad_value,
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.9
+                }
+            },
+            tooltip: {
+                show: true,
+                format: {
+                    title: function(x) {
+                        x = x.getFullYear() + "-" + (x.getMonth() + 1) + " 부실률 (단위:%)";
+                        return x;
+                    }
+                }
+            },
+            color: {
+                pattern: ['#DBDBEB', '#7577CD', '#080957', '#FF6D02', '#1684A7', '#09A599', '#F6EC72', '#6A759B', '#21273D', '#B9D4F1', '#2E3B3E', '#50666B', '#F9B8BE', '#FD6378', '#F1E58A', '#4C5374', '#71647C', '#D0F0F7',
+                    '#3F3038', '#FDF6FA', '#F1684E', '#85C8DD', '#D3E0E2', '#E9F6F5', '#E8F79A', '#49D292', '#3B445B', '#383746', '#9F1861', '#EFE94B'
+                ]
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '%Y-%m',
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
