@@ -9,7 +9,7 @@ import datetime, time
 
 class VDATE:
 
-    server_start = datetime.datetime(2018, 5, 23, 5, 50)
+    server_start = datetime.datetime(2018, 5, 30, 6, 50)
 
     def boss_darknight(self):
         print "boss_darknight"
